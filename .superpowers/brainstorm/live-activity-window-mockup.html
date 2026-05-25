@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>Live Activity Window Mockup</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+    }
+    h1 {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+    p {
+      margin: 0 0 18px;
+      color: #5f6368;
+    }
+    .window {
+      width: 1040px;
+      min-height: 620px;
+      background: #ffffff;
+      border: 1px solid #d6d6d6;
+      border-radius: 8px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+      overflow: hidden;
+    }
+    .titlebar {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 14px;
+      border-bottom: 1px solid #e5e5e5;
+      background: #f7f7f7;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff5f57;
+    }
+    .dot:nth-child(2) { background: #ffbd2e; }
+    .dot:nth-child(3) { background: #28c840; }
+    .title {
+      margin-left: 10px;
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      min-height: 578px;
+    }
+    .sidebar {
+      padding: 18px;
+      border-right: 1px solid #ededed;
+      background: #fbfbfb;
+    }
+    .main {
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+    }
+    .section {
+      margin-bottom: 18px;
+    }
+    .section h2 {
+      font-size: 13px;
+      margin: 0 0 10px;
+      color: #3c4043;
+    }
+    .field {
+      margin-bottom: 10px;
+    }
+    label {
+      display: block;
+      font-size: 12px;
+      color: #5f6368;
+      margin-bottom: 4px;
+    }
+    .input, .select, .textarea {
+      box-sizing: border-box;
+      width: 100%;
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      background: #fff;
+      min-height: 28px;
+      padding: 6px 8px;
+      font-size: 12px;
+      color: #202124;
+    }
+    .textarea {
+      min-height: 94px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      white-space: pre-wrap;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .segments {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid #b9b9b9;
+      border-radius: 6px;
+      overflow: hidden;
+      width: 280px;
+      height: 30px;
+      font-size: 12px;
+    }
+    .segment {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px solid #b9b9b9;
+      background: #f8f8f8;
+    }
+    .segment:last-child {
+      border-right: 0;
+    }
+    .segment.active {
+      background: #0a84ff;
+      color: #fff;
+      font-weight: 600;
+    }
+    .preview {
+      min-height: 230px;
+      border: 1px solid #cfcfcf;
+      border-radius: 5px;
+      padding: 12px;
+      background: #111827;
+      color: #d1fae5;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #ededed;
+    }
+    .note {
+      font-size: 12px;
+      color: #5f6368;
+    }
+    .buttons {
+      display: flex;
+      gap: 8px;
+    }
+    button {
+      height: 30px;
+      padding: 0 14px;
+      border: 1px solid #b9b9b9;
+      border-radius: 5px;
+      background: #fff;
+      font-size: 12px;
+    }
+    button.primary {
+      border-color: #0a84ff;
+      background: #0a84ff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>实时活动发送窗口草图</h1>
+  <p>建议从主窗口新增一个入口打开独立窗口，避免把普通 APNs 推送和 ActivityKit 参数混在一起。</p>
+
+  <div class="window">
+    <div class="titlebar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="title">Live Activity Push</span>
+    </div>
+    <div class="content">
+      <aside class="sidebar">
+        <div class="section">
+          <h2>APNs 连接</h2>
+          <div class="field">
+            <label>证书</label>
+            <div class="select">从 Keychain 或文件选择推送证书</div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>环境</label>
+              <div class="select">开发 / 生产</div>
+            </div>
+            <div class="field">
+              <label>Priority</label>
+              <div class="select">5 / 10</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Headers</h2>
+          <div class="field">
+            <label>apns-topic</label>
+            <div class="input">com.example.app.push-type.liveactivity</div>
+          </div>
+          <div class="field">
+            <label>Activity push token / push-to-start token</label>
+            <div class="textarea">粘贴实时活动 token</div>
+          </div>
+          <div class="field">
+            <label>apns-collapse-id（可选）</label>
+            <div class="input"></div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <div>
+          <div class="section">
+            <h2>事件</h2>
+            <div class="segments">
+              <div class="segment active">start</div>
+              <div class="segment">update</div>
+              <div class="segment">end</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>attributes-type（start 需要）</label>
+              <div class="input">OrderAttributes</div>
+            </div>
+            <div class="field">
+              <label>timestamp</label>
+              <div class="input">自动使用当前秒级时间戳</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>attributes JSON（start 需要）</label>
+              <div class="textarea">{ "orderId": "A123" }</div>
+            </div>
+            <div class="field">
+              <label>content-state JSON</label>
+              <div class="textarea">{ "status": "配送中", "progress": 0.45 }</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>stale-date（可选）</label>
+              <div class="input">秒级时间戳</div>
+            </div>
+            <div class="field">
+              <label>dismissal-date（end 可选）</label>
+              <div class="input">秒级时间戳</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>alert JSON（可选）</label>
+            <div class="textarea">{ "title": "订单更新", "body": "骑手已接单", "sound": "default" }</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section">
+            <h2>最终 payload 预览</h2>
+            <div class="preview">{
+  "aps": {
+    "timestamp": 1779523200,
+    "event": "start",
+    "attributes-type": "OrderAttributes",
+    "attributes": { "orderId": "A123" },
+    "content-state": { "status": "配送中", "progress": 0.45 }
+  }
+}</div>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span class="note">发送前校验 JSON、token、topic、priority 和 event 必填项</span>
+          <div class="buttons">
+            <button>复制 payload</button>
+            <button>保存配置</button>
+            <button class="primary">发送实时活动推送</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
