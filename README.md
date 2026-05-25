@@ -5,7 +5,18 @@
 ##### 基于PushMeBaby,https://github.com/stefanhafeneger/PushMeBaby 修改,感谢作者
 
 ## 界面截图
-![image](https://raw.githubusercontent.com/shaojiankui/SmartPush/master/demo.png)
+
+### 主界面
+![主界面](docs/images/home.png)
+
+### 普通推送
+![普通推送](docs/images/normal-push.png)
+
+### VoIP 推送
+![VoIP 推送](docs/images/voip-push.png)
+
+### 实时活动
+![实时活动](docs/images/live-activity.png)
 
 
 ## 使用方法
